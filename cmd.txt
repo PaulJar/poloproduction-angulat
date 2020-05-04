@@ -1,1 +1,14 @@
-ng new poloproduction-angular --styles=scss --skip-tests=true
+ng new poloproduction-angular --style=scss --skip-tests=true
+
+ng g c auth/signup
+ng g c auth/signin
+ng g c book-list
+ng g c book-list/single-book
+ng g c book-list/book-form
+ng g c header
+ng g s services/auth
+ng g s services/books
+ng g s services/auth-guard
+
+npm install --save bootstrap@3.3.7
+npm install --save rxjs-compat

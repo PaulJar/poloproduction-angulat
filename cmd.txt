@@ -12,3 +12,13 @@ ng g s services/auth-guard
 
 npm install --save bootstrap@3.3.7
 npm install --save rxjs-compat
+
+ng serve
+
+ng build --prod
+
+firebase init
+firebase deploy -m "1st Angular-Firebase deployment !"
+firebase deploy -m "Removing index from Firebase"
+firebase deploy -m "Pointing Angular index"
+firebase deploy -m "Changing Firebase public folder"

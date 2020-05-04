@@ -24,6 +24,7 @@ firebase deploy -m "Removing index from Firebase"
 firebase deploy -m "Pointing Angular index"
 firebase deploy -m "Changing Firebase public folder"
 firebase deploy -m "Added : authentication"
+firebase deploy -m "Added : database"
 
 npm install firebase --save
 

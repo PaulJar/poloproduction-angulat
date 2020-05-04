@@ -1,0 +1,1 @@
+ng new poloproduction-angular --styles=scss --skip-tests=true

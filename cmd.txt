@@ -25,7 +25,13 @@ firebase deploy -m "Pointing Angular index"
 firebase deploy -m "Changing Firebase public folder"
 firebase deploy -m "Added : authentication"
 firebase deploy -m "Added : database"
+firebase deploy -m "Added : storage"
 
 npm install firebase --save
 
 test@test.com	testtest
+
+ng g c auth/signupbymail
+ng g c auth/welcome
+ng g c auth/verified
+ng g c auth/signinforgotten

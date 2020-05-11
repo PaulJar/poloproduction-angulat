@@ -15,15 +15,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { WelcomeComponent } from './auth/welcome/welcome.component';
+import { SigninforgottenComponent } from './auth/signinforgotten/signinforgotten.component';
 
 const appRoutes: Routes = [
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
+  { path: 'auth/signinforgotten', component: SigninforgottenComponent },
+  { path: 'welcome', canActivate: [AuthGuardService], component: WelcomeComponent },
   { path: 'books', canActivate: [AuthGuardService], component: BookListComponent },
   { path: 'books/new', canActivate: [AuthGuardService], component: BookFormComponent },
   { path: 'books/view/:id', canActivate: [AuthGuardService], component: SingleBookComponent },
-  { path: '', redirectTo: 'books', pathMatch: 'full' },
-  { path: '**', redirectTo: 'books' }
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+  { path: '**', redirectTo: 'welcome' }
 ];
 
 @NgModule({
@@ -34,7 +38,9 @@ const appRoutes: Routes = [
     BookListComponent,
     SingleBookComponent,
     BookFormComponent,
-    HeaderComponent
+    HeaderComponent,
+    WelcomeComponent,
+    SigninforgottenComponent
   ],
   imports: [
       BrowserModule,

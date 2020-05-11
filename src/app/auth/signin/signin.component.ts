@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-signin',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 export class SigninComponent implements OnInit {
 
   signinForm: FormGroup;
+  signinFormForgotten: FormGroup;
   errorMessage: string;
 
   constructor(private formBuilder: FormBuilder,
@@ -34,11 +36,17 @@ export class SigninComponent implements OnInit {
 
     this.authService.signInUser(email, password).then(
       () => {
-        this.router.navigate(['/books']);
+        this.router.navigate(['/welcome']);
       },
       (error) => {
         this.errorMessage = error;
       }
     );
+  }
+
+  onSubmitForgotten() {
+    const email = this.signinForm.get('email').value;
+
+    this.authService.sendPasswordResetEmail(email);
   }
 }

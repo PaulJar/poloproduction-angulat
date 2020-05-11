@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h2>Mot de passe oublié</h2>
+    <form [formGroup]="signinFormForgotten" (ngSubmit)="onSubmitForgotten()">
+      <div class="form-group">
+        <label for="email">Adresse mail</label>
+        <input type="text"
+               id="email"
+               class="form-control"
+               formControlName="email">
+      </div>
+      <button class="btn btn-primary"
+              type="submit"
+              [disabled]="signinFormForgotten.invalid">Réinitialiser mon mot de passe par mail</button>
+    </form>
+    <p class="text-danger">{{ errorMessage }}</p>
+  </div>
+</div>

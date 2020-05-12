@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import * as firebase from 'firebase';
 
 @Injectable()
@@ -23,9 +22,12 @@ export class AuthService {
         (resolve, reject) => {
           firebase.auth().createUserWithEmailAndPassword(email, password).then(
             () => {
-              resolve();
+              var user = firebase.auth().currentUser;
+              console.log('Création Firebase User OK !');
+              resolve(user);
             },
             (error) => {
+              console.log('Erreur de création Firebase User ! : ' + error);
               reject(error);
             }
           );
@@ -68,6 +70,10 @@ export class AuthService {
       firebase.auth().signOut();
   }
 
+  getCurrentUser() {
+    return firebase.auth().currentUser;
+  }
+
   sendPasswordResetEmail(emailAddress: string) {
       firebase.auth().sendPasswordResetEmail(emailAddress).then(function() {
         // Email sent.
@@ -99,8 +105,10 @@ export class AuthService {
           user.updateProfile({
             displayName: pseudo
           }).then(function() {
-            resolve();
+            console.log('Update Firebase User OK !');
+            resolve(user);
           }).catch(function(error) {
+            console.log('Erreur d\'update Firebase User ! : ' + error);
             reject(error);
           });
         }
@@ -153,8 +161,10 @@ export class AuthService {
                 user.updateProfile({
                   photoURL: downloadURL
                 }).then(function() {
+                  console.log('Update Firebase User OK !');
                   resolve();
                 }).catch(function(error) {
+                  console.log('Erreur d\'update Firebase User ! : ' + error);
                   reject(error);
                 });
               });

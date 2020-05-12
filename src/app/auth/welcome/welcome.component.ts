@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
+import { PoloUser } from '../../models/polouser.model';
 
 @Component({
   selector: 'app-welcome',
@@ -38,9 +40,13 @@ export class WelcomeComponent implements OnInit {
   fileUrl: string;
   fileUploaded = false;
   validateMessageAvatar: string;
+  errorMessageAvatar: string;
+
+  poloUser: PoloUser;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
+              private usersService: UsersService,
               private router: Router) {
     setTimeout(
       () => {
@@ -61,6 +67,13 @@ export class WelcomeComponent implements OnInit {
           this.uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
                            // this value to authenticate with your backend server, if
                            // you have one. Use User.getToken() instead.
+
+          this.poloUser = new PoloUser(0);
+          this.usersService.getCurrentPoloUser(user).then(
+            (poloUser: PoloUser) => {
+              this.poloUser = poloUser;
+            }
+          );
         } else {
           this.isAuth = false;
         }
@@ -118,7 +131,8 @@ export class WelcomeComponent implements OnInit {
     this.isValidateMessagePseudo = true;
 
     this.authService.updateDisplayName(pseudo).then(
-      () => {
+      (user: firebase.User) => {
+        this.usersService.updatePoloUserFromFirebaseUser(user);
         return new Promise(
           (resolve, reject) => {
             setTimeout(
@@ -164,6 +178,7 @@ export class WelcomeComponent implements OnInit {
 
         var user = firebase.auth().currentUser;
         this.photoUrl = user.photoURL;
+        this.usersService.updatePoloUserFromFirebaseUser(user);
 
         return new Promise(
           (resolve, reject) => {
@@ -175,6 +190,9 @@ export class WelcomeComponent implements OnInit {
             );
           }
         );
+      },
+      (error) => {
+        this.errorMessageAvatar = error;
       }
     );
   }

@@ -26,6 +26,8 @@ firebase deploy -m "Changing Firebase public folder"
 firebase deploy -m "Added : authentication"
 firebase deploy -m "Added : database"
 firebase deploy -m "Added : storage"
+firebase deploy -m "Added : Nice welcome / profile page"
+firebase deploy -m "Added : Nice welcome / profile page - with ng build before"
 
 npm install firebase --save
 
@@ -35,3 +37,5 @@ ng g c auth/signupbymail
 ng g c auth/welcome
 ng g c auth/verified
 ng g c auth/signinforgotten
+
+ng g s services/users

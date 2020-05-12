@@ -21,6 +21,8 @@
                    class="form-control" accept="image/*">
             <span *ngIf="validateMessageAvatar"
                   class="glyphicon glyphicon-ok" style="color:lightgreen"> {{ validateMessageAvatar }}</span>
+            <span *ngIf="errorMessageAvatar"
+                  class="glyphicon glyphicon-remove" style="color:lightgreen"> {{ errorMessageAvatar }}</span>
           </div>
         </div>
       </form>
@@ -102,6 +104,18 @@
           </div>
         </div>
       </form>
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="email">Compte en banque</label>
+        </div>
+      </div>
+      <div *ngIf="poloUser"
+           class="row">
+        <div class="form-group col-md-6">
+          <span class="badge badge-warning">{{ poloUser.polodollars }} <img src="favicon.ico" height="16" width="16">olodollars</span>
+        </div>
+      </div>
 
 <!--      &lt;!&ndash; Connection time counter &ndash;&gt;
       <div class="col-md-12">

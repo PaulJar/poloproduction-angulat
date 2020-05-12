@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,6 +16,7 @@ export class SignupComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
+              private usersService: UsersService,
               private router: Router) { }
 
   ngOnInit() {
@@ -33,7 +35,8 @@ export class SignupComponent implements OnInit {
     const password = this.signupForm.get('password').value;
 
     this.authService.createNewUser(email, password).then(
-      () => {
+      (user: firebase.User) => {
+        this.usersService.createPoloUser(user); // Optional
         this.router.navigate(['/welcome']);
       },
       (error) => {

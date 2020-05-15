@@ -7,6 +7,12 @@
       <li routerLinkActive="active">
         <a routerLink="books">Livres</a>
       </li>
+      <li routerLinkActive="active">
+        <a routerLink="casino">Casino</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="ranking">Classement</a>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li routerLinkActive="active" *ngIf="!isAuth">
@@ -16,7 +22,7 @@
         <a routerLink="auth/signin">Connexion</a>
       </li>
       <li routerLinkActive="active" *ngIf="isAuth && poloUser">
-        <a routerLink="welcome"><span class="badge badge-warning">{{ poloUser.polodollars }} <img src="favicon.ico" height="16" width="16"></span></a>
+        <a routerLink="welcome"><span class="badge badge-warning">{{ poloUser.polodollars }}<img src="favicon.ico" height="16" width="16"></span></a>
       </li>
       <li>
         <a (click)="onSignOut()"

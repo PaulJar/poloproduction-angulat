@@ -68,8 +68,8 @@ export class WelcomeComponent implements OnInit {
                            // this value to authenticate with your backend server, if
                            // you have one. Use User.getToken() instead.
 
-          this.poloUser = new PoloUser(0);
-          this.usersService.getCurrentPoloUser(user).then(
+          this.poloUser = new PoloUser();
+          this.usersService.getCurrentPoloUser().then(
             (poloUser: PoloUser) => {
               this.poloUser = poloUser;
             }

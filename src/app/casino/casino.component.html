@@ -1,0 +1,79 @@
+<div class="row" xmlns:disabled="http://www.w3.org/1999/xhtml">
+  <div *ngIf="!name || !emailVerified"
+       class="col-md-8 col-md-offset-2">
+
+    <div *ngIf="poloUser"
+         class="col-md-12">
+      <h2>Espace réservé</h2>
+      <img src="/assets/img/bouncer.png">
+      <p>Espace réservé aux membre ayant : </p>
+      <ul>
+        <li>vérifié leur email</li>
+        <li>renseigné un pseudo</li>
+      </ul>
+      <p>Merci de remplir ces conditions <a (click)="redirectOnWelcome()" style="cursor:pointer">à l'accueil</a>.</p>
+    </div>
+  </div>
+
+  <div *ngIf="name && emailVerified"
+       class="col-md-8 col-md-offset-2">
+
+    <div *ngIf="poloUser"
+         class="col-md-12">
+      <h2>Bienvenue au casino {{ poloUser.pseudo }} !</h2>
+    </div>
+
+    <!-- Connection time counter
+    <div class="col-md-12">
+      <p>Vous êtes sur cette page depuis {{ secondes }} secondes !</p>
+    </div>
+     -->
+
+    <!-- Polo Roulette -->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <h3>Table n°1 - la Polo-Roulette</h3>
+        <p>Objectif : lancez la roulette, et tombez sur le bon numéro pour gagner des
+          <span class="badge badge-warning"><img src="favicon.ico" height="16" width="16"></span> !</p>
+        <p>Temps de recharge : 2 sec.</p>
+        <p>% de chances : 1% par gain</p>
+        <ul>
+          <li>&nbsp;&nbsp;9 : <span class="badge badge-warning">&nbsp;&nbsp;10<img src="favicon.ico" height="16" width="16"></span></li>
+          <li>42 : <span class="badge badge-warning">&nbsp;&nbsp;20<img src="favicon.ico" height="16" width="16"></span></li>
+          <li>66 : <span class="badge badge-warning">&nbsp;&nbsp;50<img src="favicon.ico" height="16" width="16"></span></li>
+          <li>77 : <span class="badge badge-warning">100<img src="favicon.ico" height="16" width="16"></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <form (ngSubmit)="onSubmitPoloRoulette()">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <div class="container">
+            <img src="https://pngimage.net/wp-content/uploads/2018/06/poker-table-png-1.png" alt="Polo Roulette" style="width:100%;max-height:130px;">
+            <button *ngIf="isRouletteReady"
+                    type="submit"
+                    class="btn btn-primary">Lancer la Polo-Roulette ! <span class="glyphicon glyphicon-play-circle" style="color:lightgreen"></span></button>
+          </div>
+        </div>
+        <div *ngIf="poloRouletteNumber"
+             class="form-group col-md-6">
+          <div class="container">
+            <img src="http://clipart-library.com/images/BTgKzAGec.png" alt="Polo Roulette" style="width:100%;max-height:130px;">
+            <button class="btn btn-primary"
+                    disabled
+                    style="background-color: #E6C95C;font-size: 32px;">{{ poloRouletteNumber }}</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div *ngIf="poloRouletteMsgWon"
+         class="alert alert-success" role="alert" style="text-align: center;">
+      {{ poloRouletteMsgWon }}<span class="badge badge-warning">{{ poloRoulettePPWon }}<img src="favicon.ico" height="16" width="16"></span> !
+    </div>
+    <div *ngIf="!poloRouletteMsgWon"
+         class="alert alert-warning" role="alert" style="height:55px;">
+    </div>
+
+  </div>
+</div>

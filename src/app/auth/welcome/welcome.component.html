@@ -105,16 +105,45 @@
         </div>
       </form>
 
-      <div class="row">
+      <div *ngIf="poloUser"
+           class="row">
         <div class="form-group col-md-12">
-          <label for="email">Compte en banque</label>
+          <label for="email">Money</label>
         </div>
       </div>
       <div *ngIf="poloUser"
            class="row">
         <div class="form-group col-md-6">
-          <span class="badge badge-warning">{{ poloUser.polodollars }} <img src="favicon.ico" height="16" width="16">olodollars</span>
+          <span class="badge badge-warning">{{ poloUser.polodollars }}<img src="favicon.ico" height="16" width="16">olodollars</span>
         </div>
+      </div>
+
+      <br />
+
+      <div *ngIf="poloUser"
+           class="row">
+        <div class="form-group col-md-12">
+          <label for="email">Badges</label>
+        </div>
+      </div>
+      <div *ngIf="poloUser"
+           class="row">
+        <table class="table table-striped" style="text-align:center">
+          <tbody>
+          <tr>
+            <td>.</td>
+            <td>.</td>
+            <td>.</td>
+            <td>.</td>
+          </tr>
+          <tr style="background-color:#eee;">
+            <td>.</td>
+            <td>.</td>
+            <td>.</td>
+            <td>.</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
 
 <!--      &lt;!&ndash; Connection time counter &ndash;&gt;

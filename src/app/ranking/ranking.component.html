@@ -1,0 +1,48 @@
+<div class="row" xmlns:disabled="http://www.w3.org/1999/xhtml">
+  <div *ngIf="!name || !emailVerified"
+       class="col-md-8 col-md-offset-2">
+
+    <div *ngIf="poloUser"
+         class="col-md-12">
+      <h2>Espace réservé</h2>
+      <img src="/assets/img/bouncer.png">
+      <p>Espace réservé aux membre ayant : </p>
+      <ul>
+        <li>vérifié leur email</li>
+        <li>renseigné un pseudo</li>
+      </ul>
+      <p>Merci de remplir ces conditions <a (click)="redirectOnWelcome()" style="cursor:pointer">à l'accueil</a>.</p>
+    </div>
+  </div>
+
+  <div *ngIf="name && emailVerified"
+       class="col-md-8 col-md-offset-2">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Classement</h2>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col" style="text-align: center;">#</th>
+            <th scope="col" style="text-align: center;">Joueur</th>
+            <th scope="col" style="text-align: center;"><span class="badge badge-warning"><img src="favicon.ico" height="16" width="16"></span></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let poloUserToList of poloUsers; let i = index"
+              style="text-align: center;">
+            <td>{{ i+1 }}</td>
+            <td><img class="img-thumbnail"
+                     *ngIf="poloUserToList.avatarUrl"
+                     src="{{ poloUserToList.avatarUrl }}"
+                     style="height:50px;">      {{ poloUserToList.pseudo }}</td>
+            <td>{{ poloUserToList.polodollars }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

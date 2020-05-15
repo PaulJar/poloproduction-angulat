@@ -28,6 +28,7 @@ firebase deploy -m "Added : database"
 firebase deploy -m "Added : storage"
 firebase deploy -m "Added : Nice welcome / profile page"
 firebase deploy -m "Added : Nice welcome / profile page - with ng build before"
+firebase deploy -m "Add userPolo on database"
 
 npm install firebase --save
 
@@ -39,3 +40,10 @@ ng g c auth/verified
 ng g c auth/signinforgotten
 
 ng g s services/users
+
+ng g c casino
+
+npm i sketch-js
+npm uninstall sketch-js
+
+ng g c ranking

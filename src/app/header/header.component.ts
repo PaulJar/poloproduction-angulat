@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import * as firebase from 'firebase';
 import { UsersService } from '../services/users.service';
 import { PoloUser } from '../models/polouser.model';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   isAuth: boolean;
 
   poloUser: PoloUser;
+
+  poloUserSubscription: Subscription;
 
   constructor(private authService: AuthService,
               private usersService: UsersService) { }
@@ -24,8 +27,8 @@ export class HeaderComponent implements OnInit {
         if(user) {
           this.isAuth = true;
 
-          this.poloUser = new PoloUser(0);
-          this.usersService.getCurrentPoloUser(user).then(
+          this.poloUser = new PoloUser();
+          this.usersService.getCurrentPoloUser().then(
             (poloUser: PoloUser) => {
               this.poloUser = poloUser;
             }
@@ -35,6 +38,17 @@ export class HeaderComponent implements OnInit {
         }
       }
     );
+
+    // Create a Subscription to a Subject
+    this.poloUserSubscription = this.usersService.poloUserSubject.subscribe(
+      (poloUser: PoloUser) => {
+        this.poloUser = poloUser;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.poloUserSubscription.unsubscribe();
   }
 
   onSignOut() {

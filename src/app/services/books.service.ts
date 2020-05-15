@@ -29,27 +29,27 @@ export class BooksService {
             this.emitBooks();
           }
         );
-    }
+  }
 
-    getSingleBook(id: number) {
-      return new Promise(
-        (resolve, reject) => {
-          firebase.database().ref('/books/' + id).once('value').then(
-            (data: DataSnapshot) => {
-              resolve(data.val());
-            }, (error) => {
-              reject(error);
-            }
-          );
-        }
-      );
-    }
+  getSingleBook(id: number) {
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('/books/' + id).once('value').then(
+          (data: DataSnapshot) => {
+            resolve(data.val());
+          }, (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
 
-    createNewBook(newBook: Book) {
-      this.books.push(newBook);
-      this.saveBooks();
-      this.emitBooks();
-    }
+  createNewBook(newBook: Book) {
+    this.books.push(newBook);
+    this.saveBooks();
+    this.emitBooks();
+  }
 
   removeBook(book: Book) {
     if(book.photo) {

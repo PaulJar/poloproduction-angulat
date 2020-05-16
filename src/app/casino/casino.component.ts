@@ -31,7 +31,20 @@ export class CasinoComponent implements OnInit, OnDestroy {
   poloUser: PoloUser;
 
   poloUsers: PoloUser[] = [];
-  poloUsersSubscription: Subscription;
+  poloUserSubscription: Subscription;
+
+  pariePasForm: FormGroup;
+  pariePasMise: number;
+  pariePasResultat: number;
+  pariePasMsgWon: string;
+  pariePasPPWon: number;
+  pariePasMsgErr: string;
+
+  topRandom: number;
+  leftRandom: number;
+  displayRandom: boolean;
+  flashMsgWon: string;
+  flashPPWon: number;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -71,6 +84,7 @@ export class CasinoComponent implements OnInit, OnDestroy {
     counter.subscribe(
       (value) => {
         this.secondes = value;
+        this.setRandomButtonPosition();
       },
       (error) => {
         console.log('Uh-oh, an error occurred! : ' + error);
@@ -80,21 +94,25 @@ export class CasinoComponent implements OnInit, OnDestroy {
       }
     );
 
-    // Add Subscription on Polo Users
-    this.poloUsersSubscription = this.usersService.poloUsersSubject.subscribe(
-      (poloUsers: PoloUser[]) => {
-        this.poloUsers = poloUsers;
+    // Create a Subscription to a Subject
+    this.poloUserSubscription = this.usersService.poloUserSubject.subscribe(
+      (poloUser: PoloUser) => {
+        this.poloUser = poloUser;
       }
     );
 
-    // get PoloUsers from database and emit them on current list
-    this.usersService.getPoloUsers();
-    this.usersService.emitPoloUsers();
+    this.initFormPariePas();
+
+    this.setRandomButtonPosition();
   }
 
   ngOnDestroy() {
-    // Remove Subscription on Polo Users
-    this.poloUsersSubscription.unsubscribe();
+    // Remove Subscription on Polo User
+    this.poloUserSubscription.unsubscribe();
+  }
+
+  redirectOnWelcome() {
+    this.router.navigate(['/welcome']);
   }
 
   hasBadge(obj, badgeType: string){
@@ -102,8 +120,8 @@ export class CasinoComponent implements OnInit, OnDestroy {
   }
 
   onSubmitPoloRoulette() {
-    let max: number = 99;
-    this.poloRouletteNumber = Math.floor(Math.random() * Math.floor(max));
+    let max: number = 99; // between 1 and 99
+    this.poloRouletteNumber = Math.floor(Math.random() * Math.floor(max)) + 1;
     this.isRouletteReady = false;
 
     this.poloRoulettePPWon = 0;
@@ -125,7 +143,7 @@ export class CasinoComponent implements OnInit, OnDestroy {
           break;
        }
        default: {
-          this.poloRoulettePPWon = 10;
+          this.poloRoulettePPWon = 0;
           break;
        }
     }
@@ -155,7 +173,80 @@ export class CasinoComponent implements OnInit, OnDestroy {
     );
   }
 
-  redirectOnWelcome() {
-    this.router.navigate(['/welcome']);
+  initFormPariePas() {
+    this.pariePasForm = this.formBuilder.group({
+      pariePasMise: [0, Validators.required]
+    });
   }
+
+  onSubmitPariePas() {
+    let pariePasMise = this.pariePasForm.get('pariePasMise').value;
+    if(pariePasMise > 10) {
+      pariePasMise = 10;
+    }
+
+    if(pariePasMise>this.poloUser.polodollars) {
+      this.pariePasMsgErr = "Ne pariez pas au-dessus de vos moyens...";
+    } else {
+      this.pariePasMsgErr = "";
+
+      let max: number = 4; // between 1 and 4
+      this.pariePasResultat = Math.floor(Math.random() * Math.floor(max)) + 1;
+
+      this.pariePasPPWon = 0;
+      switch(this.pariePasResultat) {
+         case 0: {
+            this.pariePasPPWon = -pariePasMise;
+            break;
+         }
+         case 1: {
+            this.pariePasPPWon = -pariePasMise;
+            break;
+         }
+         case 2: {
+            this.pariePasPPWon = pariePasMise * 3;
+            break;
+         }
+         case 3: {
+            this.pariePasPPWon = -pariePasMise;
+            break;
+         }
+         default: {
+            this.pariePasPPWon = -pariePasMise;
+            break;
+         }
+      }
+
+      // add/remove PoloDollar on database
+      this.usersService.addPolodollar(this.pariePasPPWon);
+
+      if(this.pariePasPPWon > 0) {
+        this.pariePasMsgWon = "BRAVO ! Vous avez gagné ";
+      } else if(this.pariePasPPWon < 0) {
+        this.pariePasMsgWon = "Vous avez perdu ";
+      }
+    }
+  }
+
+  setRandomButtonPosition() {
+    let maxTop: number = 9; // between 1 and 9
+    this.topRandom = Math.floor(Math.random() * Math.floor(maxTop)) + 1;
+
+    let maxLeft: number = 90; // between 1 and 90
+    this.leftRandom = Math.floor(Math.random() * Math.floor(maxLeft)) + 1;
+
+    let maxDisplay: number = 7; // between 1 and 7
+    this.displayRandom = Math.floor(Math.random() * Math.floor(maxDisplay)) + 1 == 1 ? true : false;
+  }
+
+  onSubmitFlash() {
+    let maxPPWin: number = 10; // between 1 and 10
+    this.flashPPWon = Math.floor(Math.random() * Math.floor(maxPPWin)) + 1;
+
+    // add/remove PoloDollar on database
+    this.usersService.addPolodollar(this.flashPPWon);
+
+    this.flashMsgWon = "BRAVO ! Vous avez gagné ";
+  }
+
 }

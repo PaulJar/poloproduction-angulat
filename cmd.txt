@@ -30,6 +30,7 @@ firebase deploy -m "Added : Nice welcome / profile page"
 firebase deploy -m "Added : Nice welcome / profile page - with ng build before"
 firebase deploy -m "Add userPolo on database"
 firebase deploy -m "Add casino and ranking"
+firebase deploy -m "Add Boutique"
 
 npm install firebase --save
 

@@ -32,12 +32,6 @@
       </div>
     </div>
 
-    <!-- Connection time counter
-    <div class="col-md-12">
-      <p>Vous êtes sur cette page depuis {{ secondes }} secondes !</p>
-    </div>
-     -->
-
     <!-- Polo Roulette -->
     <div class="row">
       <div class="form-group col-md-12">
@@ -90,12 +84,81 @@
       </div>
     </form>
     <div *ngIf="poloRouletteMsgWon"
-         class="alert alert-success" role="alert" style="text-align: center;">
+         class="alert alert-success" role="alert" style="text-align: center;height:55px;">
       {{ poloRouletteMsgWon }}<span class="badge badge-warning">{{ poloRoulettePPWon }}<img src="favicon.ico" height="16" width="16"></span> !
     </div>
     <div *ngIf="!poloRouletteMsgWon"
-         class="alert alert-warning" role="alert" style="height:55px;">
+         class="alert alert-warning" role="alert" style="text-align: center;height:55px;">
     </div>
+
+    <!-- Parie pas ! -->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <h3>Table n°2 - Parie pas !</h3>
+        <p>Objectif : 1 chance / 4 de tripler votre mise !</p>
+        <p>Mise max : <span class="badge badge-warning">10<img src="favicon.ico" height="16" width="16"></span></p>
+      </div>
+    </div>
+
+    <form [formGroup]="pariePasForm" (ngSubmit)="onSubmitPariePas()">
+      <div class="row">
+        <div class="form-group col-md-6">
+          Miser : <input type="number" id="pariePasMise" min="0" max="10" formControlName="pariePasMise" data-bind="value:pariePasMise" />
+          <span class="badge badge-warning"><img src="favicon.ico" height="16" width="16"></span>
+        </div>
+        <div class="form-group col-md-6">
+          <button type="submit"
+                  class="btn btn-primary">Parier !</button>
+        </div>
+      </div>
+    </form>
+    <div *ngIf="pariePasMsgErr=='' && (pariePasPPWon==null || pariePasPPWon==0)"
+         class="alert alert-warning" role="alert"  style="text-align: center;height:55px;">
+      {{ pariePasMsgErr }}
+    </div>
+    <div *ngIf="pariePasMsgErr!=''"
+         class="alert alert-warning" role="alert"  style="text-align: center;height:55px;">
+      {{ pariePasMsgErr }}
+    </div>
+    <div *ngIf="pariePasMsgErr=='' && pariePasPPWon>0"
+         class="alert alert-success" role="alert" style="text-align: center;height:55px;">
+      {{ pariePasMsgWon }}<span class="badge badge-warning">{{ pariePasPPWon }}<img src="favicon.ico" height="16" width="16"></span> !
+    </div>
+    <div *ngIf="pariePasMsgErr=='' && pariePasPPWon<0"
+         class="alert alert-danger" role="alert" style="text-align: center;height:55px;">
+      {{ pariePasMsgWon }}<span class="badge badge-warning">{{ -pariePasPPWon }}<img src="favicon.ico" height="16" width="16"></span>...
+    </div>
+
+    <!-- Flash -->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <h3>Table n°3 - Flash</h3>
+        <p>Objectif : Un bouton de gain apparaît aléatoirement.</p>
+        <p>Clique dessus pour gagner le gain, avant que le bouton ne disparaisse !</p>
+      </div>
+    </div>
+
+    <div class="alert alert-danger form-group" style="background-color:#65AFFE;height:150px;">
+      <form (ngSubmit)="onSubmitFlash()">
+        <div class="row">
+          <button type="submit"
+                  *ngIf="displayRandom"
+                  style="margin: {{topRandom}}% 0% 0% {{leftRandom}}%;"
+                  class="btn btn-primary positionRandom3">+</button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="flashPPWon==null"
+         class="alert alert-warning" role="alert"  style="text-align: center;height:55px;">
+    </div>
+    <div *ngIf="flashPPWon!=null"
+         class="alert alert-warning" role="alert"  style="text-align: center;height:55px;">
+      {{ flashMsgWon }}<span class="badge badge-warning">{{ flashPPWon }}<img src="favicon.ico" height="16" width="16"></span> !
+    </div>
+
+<!--    <div class="col-md-12">
+      <p>Vous êtes sur cette page depuis {{ secondes }} secondes !</p>
+    </div>-->
 
   </div>
 </div>

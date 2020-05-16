@@ -1,170 +1,218 @@
 <div class="row" xmlns:disabled="http://www.w3.org/1999/xhtml">
+
   <div class="col-md-8 col-md-offset-2">
     <div class="col-md-12">
-      <h2>Bienvenue {{ name || email }} !</h2>
-    </div>
-
-    <!-- Avatar -->
-    <div class="col-md-4">
-      <form>
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label>Avatar</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-12">
-            <img class="img-thumbnail"
-                 *ngIf="photoUrl"
-                 [src]="photoUrl">
-            <input type="file" (change)="detectFiles($event)"
-                   class="form-control" accept="image/*">
-            <span *ngIf="validateMessageAvatar"
-                  class="glyphicon glyphicon-ok" style="color:lightgreen"> {{ validateMessageAvatar }}</span>
-            <span *ngIf="errorMessageAvatar"
-                  class="glyphicon glyphicon-remove" style="color:lightgreen"> {{ errorMessageAvatar }}</span>
-          </div>
-        </div>
-      </form>
-    </div>
-
-<!--
-    &lt;!&ndash; Authentication data &ndash;&gt;
-    <p>isAuth: {{ isAuth }}</p>
-    <p>name: {{ name }}</p>
-    <p>email: {{ email }}</p>
-    <p>photoUrl: {{ photoUrl }}</p>
-    <p>uid: {{ uid }}</p>
-    <p [ngStyle]="{color: getColor()}">emailVerified: {{ emailVerified }}</p>
--->
-
-    <div class="col-md-8">
-
-      <!-- Email -->
-      <form (ngSubmit)="onSubmitEmailVerification()">
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label for="email">Email
-              <span *ngIf="emailVerified"
-                    class="glyphicon glyphicon-check" style="color:lightgreen" title="Email vérifié"></span>
-            </label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-6">
-            <input type="text" id="email"
-                   disabled
-                   class="form-control" value="{{ email }}">
-          </div>
-          <div class="form-group col-md-6">
-            <button *ngIf="!emailVerified && !isValidateMessageMailSent"
-                    class="form-control btn btn-primary"
-                    type="submit">Vérifier <span class="glyphicon glyphicon-envelope"></span></button>
-            <button *ngIf="!emailVerified && isValidateMessageMailSent"
-                    style="cursor:no-drop"
-                    class="form-control btn btn-success"><span class="glyphicon glyphicon-ok"> Mail envoyé</span></button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-12">
-            <span *ngIf="errorMessageMail"
-                  class="glyphicon glyphicon-remove" style="color:red"> {{ errorMessageMail }}</span>
-          </div>
-        </div>
-      </form>
-
-      <!-- Pseudo -->
-      <form [formGroup]="pseudoForm" (ngSubmit)="onSubmitPseudo()">
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label for="email">Pseudo</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-6">
-            <input type="text" id="pseudo"
-                   [(ngModel)]="name"
-                   class="form-control"
-                   formControlName="pseudo">
-          </div>
-          <div class="form-group col-md-6">
-            <button *ngIf="!isValidateMessagePseudo"
-                    class="form-control btn btn-primary"
-                    [disabled]="pseudoForm.invalid"
-                    type="submit">Valider <span class="glyphicon glyphicon-ok"></span></button>
-            <button *ngIf="isValidateMessagePseudo"
-                    style="cursor:no-drop"
-                    class="form-control btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-12">
-            <span *ngIf="errorMessageMail"
-                  class="glyphicon glyphicon-remove" style="color:red"> {{ errorMessagePseudo }}</span>
-          </div>
-        </div>
-      </form>
-
-      <div *ngIf="poloUser"
-           class="row">
-        <div class="form-group col-md-12">
-          <label for="email">Money</label>
-        </div>
-      </div>
-      <div *ngIf="poloUser"
-           class="row">
-        <div class="form-group col-md-6">
-          <span class="badge badge-warning">{{ poloUser.polodollars }}<img src="favicon.ico" height="16" width="16">olodollars</span>
-        </div>
-      </div>
-
       <br />
+      <img src="/assets/img/welcome.png" class="centerImg">
+    </div>
+  </div>
 
-      <div *ngIf="poloUser"
-           class="row">
-        <div class="form-group col-md-12">
-          <label for="email">Badges</label>
-        </div>
-      </div>
-      <div *ngIf="poloUser"
-           class="row">
-        <table class="table table-striped" style="text-align:center">
-          <tbody>
-          <tr>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-          </tr>
-          <tr style="background-color:#eee;">
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="col-md-8 col-md-offset-2">
 
-<!--      &lt;!&ndash; Connection time counter &ndash;&gt;
+    <div class="row">
       <div class="col-md-12">
-        <p>Vous êtes sur cette page depuis {{ secondes }} secondes !</p>
+        <h2>Bienvenue {{ name || email }} !</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Avatar -->
+      <div class="col-md-4">
+        <form>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Avatar</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <img class="img-thumbnail"
+                   *ngIf="photoUrl"
+                   [src]="photoUrl">
+              <input type="file" (change)="detectFiles($event)"
+                     class="form-control" accept="image/*">
+              <span *ngIf="validateMessageAvatar"
+                    class="glyphicon glyphicon-ok" style="color:lightgreen"> {{ validateMessageAvatar }}</span>
+              <span *ngIf="errorMessageAvatar"
+                    class="glyphicon glyphicon-remove" style="color:lightgreen"> {{ errorMessageAvatar }}</span>
+            </div>
+          </div>
+        </form>
       </div>
 
-      &lt;!&ndash; Polo Roulette &ndash;&gt;
-      <form (ngSubmit)="onSubmitPoloRoulette()">
-        <div class="row">
-          <div class="form-group col-md-6">
-            <button class="btn btn-primary"
-                    [disabled]="!isRouletteReady"
-                    type="submit">Lancer la Polo-Roulette !</button>
+  <!--
+      &lt;!&ndash; Authentication data &ndash;&gt;
+      <p>isAuth: {{ isAuth }}</p>
+      <p>name: {{ name }}</p>
+      <p>email: {{ email }}</p>
+      <p>photoUrl: {{ photoUrl }}</p>
+      <p>uid: {{ uid }}</p>
+      <p [ngStyle]="{color: getColor()}">emailVerified: {{ emailVerified }}</p>
+  -->
+
+      <div class="col-md-8">
+
+        <!-- Email -->
+        <form (ngSubmit)="onSubmitEmailVerification()">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="email">Email
+                <span *ngIf="emailVerified"
+                      class="glyphicon glyphicon-check" style="color:lightgreen" title="Email vérifié"></span>
+              </label>
+            </div>
           </div>
-          <div class="form-group col-md-6">
-            <p class="text-info">{{ poloRouletteNumber }}</p>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <input type="text" id="email"
+                     disabled
+                     class="form-control" value="{{ email }}">
+            </div>
+            <div class="form-group col-md-6">
+              <button *ngIf="!emailVerified && !isValidateMessageMailSent"
+                      class="form-control btn btn-primary"
+                      type="submit">Vérifier <span class="glyphicon glyphicon-envelope"></span></button>
+              <button *ngIf="!emailVerified && isValidateMessageMailSent"
+                      style="cursor:no-drop"
+                      class="form-control btn btn-success"><span class="glyphicon glyphicon-ok"> Mail envoyé</span></button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <span *ngIf="errorMessageMail"
+                    class="glyphicon glyphicon-remove" style="color:red"> {{ errorMessageMail }}</span>
+            </div>
+          </div>
+        </form>
+
+        <!-- Pseudo -->
+        <form [formGroup]="pseudoForm" (ngSubmit)="onSubmitPseudo()">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="email">Pseudo</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <input type="text" id="pseudo"
+                     [(ngModel)]="name"
+                     class="form-control"
+                     formControlName="pseudo">
+            </div>
+            <div class="form-group col-md-6">
+              <button *ngIf="!isValidateMessagePseudo"
+                      class="form-control btn btn-primary"
+                      [disabled]="pseudoForm.invalid"
+                      type="submit">Valider <span class="glyphicon glyphicon-ok"></span></button>
+              <button *ngIf="isValidateMessagePseudo"
+                      style="cursor:no-drop"
+                      class="form-control btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <span *ngIf="errorMessageMail"
+                    class="glyphicon glyphicon-remove" style="color:red"> {{ errorMessagePseudo }}</span>
+            </div>
+          </div>
+        </form>
+
+        <div *ngIf="poloUser"
+             class="row">
+          <div class="form-group col-md-12">
+            <label for="email">Money</label>
           </div>
         </div>
-      </form>-->
+        <div *ngIf="poloUser"
+             class="row">
+          <div class="form-group col-md-6">
+            <span class="badge badge-warning">{{ poloUser.polodollars }}<img src="favicon.ico" height="16" width="16">olodollars</span>
+          </div>
+        </div>
 
+        <br />
+
+        <div *ngIf="poloUser"
+             class="row">
+          <div class="form-group col-md-12">
+            <label for="email">Badges</label>
+          </div>
+        </div>
+        <div *ngIf="poloUser"
+             class="row">
+          <table class="table table-striped" style="text-align:center">
+            <tbody>
+            <tr>
+              <td>
+                <!-- *ngIf="!poloUser.badges['roche']" -->
+                <img src="/assets/img/badges/240px-No_Badge.png"
+                     *ngIf="!hasBadge(poloUser.badges, 'roche')"
+                     title="Tu n'as pas encore ce badge !"
+                     style="height:50px;">
+                <img src="/assets/img/badges/240px-Boulder_Badge.png"
+                     *ngIf="hasBadge(poloUser.badges, 'roche')"
+                     title="Badge Roche - Divise par 2 le temps d'attente à la Polo-Roulette."
+                     style="height:50px;">
+              </td>
+              <td>
+                <img src="/assets/img/badges/240px-No_Badge.png"
+                     *ngIf="!hasBadge(poloUser.badges, 'cascade')"
+                     title="Tu n'as pas encore ce badge !"
+                     style="height:50px;">
+                <img src="/assets/img/badges/240px-Cascade_Badge.png"
+                     *ngIf="hasBadge(poloUser.badges, 'cascade')"
+                     title="Badge Cascade - Multiplie par 2 les gains à la Polo-Roulette."
+                     style="height:50px;">
+              </td>
+              <td>
+                <img src="/assets/img/badges/240px-No_Badge.png"
+                     *ngIf="!hasBadge(poloUser.badges, 'terre')"
+                     title="Tu n'as pas encore ce badge !"
+                     style="height:50px;">
+                <img src="/assets/img/badges/240px-Earth_Badge.png"
+                     *ngIf="hasBadge(poloUser.badges, 'terre')"
+                     title="Badge Terre - :)"
+                     style="height:50px;">
+              </td>
+              <td>
+                <img src="/assets/img/badges/240px-No_Badge.png"
+                     title="Tu n'as pas encore ce badge !"
+                     style="height:50px;">
+              </td>
+            </tr>
+            <tr style="background-color:#eee;">
+              <td>
+                <img src="/assets/img/badges/240px-No_Badge.png"
+                     title="Tu n'as pas encore ce badge !"
+                     style="height:50px;">
+              </td>
+              <td>
+                <img src="/assets/img/badges/240px-No_Badge.png"
+                     title="Tu n'as pas encore ce badge !"
+                     style="height:50px;">
+              </td>
+              <td>
+                <img src="/assets/img/badges/240px-No_Badge.png"
+                     title="Tu n'as pas encore ce badge !"
+                     style="height:50px;">
+              </td>
+              <td>
+                <img src="/assets/img/badges/240px-No_Badge.png"
+                     title="Tu n'as pas encore ce badge !"
+                     style="height:50px;">
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+  <!--      &lt;!&ndash; Connection time counter &ndash;&gt;
+        <div class="col-md-12">
+          <p>Vous êtes sur cette page depuis {{ secondes }} secondes !</p>
+        </div>
+        </form>-->
+
+      </div>
     </div>
   </div>
 </div>

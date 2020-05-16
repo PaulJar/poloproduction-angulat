@@ -1,7 +1,14 @@
 <div class="row" xmlns:disabled="http://www.w3.org/1999/xhtml">
+
+  <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-12">
+      <br />
+      <img src="/assets/img/casino.png" class="img-thumbnail centerImg">
+    </div>
+  </div>
+
   <div *ngIf="!name || !emailVerified"
        class="col-md-8 col-md-offset-2">
-
     <div *ngIf="poloUser"
          class="col-md-12">
       <h2>Espace réservé</h2>
@@ -18,9 +25,11 @@
   <div *ngIf="name && emailVerified"
        class="col-md-8 col-md-offset-2">
 
-    <div *ngIf="poloUser"
-         class="col-md-12">
-      <h2>Bienvenue au casino {{ poloUser.pseudo }} !</h2>
+    <div class="row">
+      <div *ngIf="poloUser"
+           class="col-md-12">
+        <h2>Bienvenue au casino {{ poloUser.pseudo }} !</h2>
+      </div>
     </div>
 
     <!-- Connection time counter
@@ -35,13 +44,26 @@
         <h3>Table n°1 - la Polo-Roulette</h3>
         <p>Objectif : lancez la roulette, et tombez sur le bon numéro pour gagner des
           <span class="badge badge-warning"><img src="favicon.ico" height="16" width="16"></span> !</p>
-        <p>Temps de recharge : 2 sec.</p>
-        <p>% de chances : 1% par gain</p>
-        <ul>
+        <p *ngIf="!hasBadge(poloUser.badges, 'roche')">Temps de recharge : 2 sec.</p>
+        <p *ngIf="hasBadge(poloUser.badges, 'roche')">Temps de recharge : 1 sec. <img src="/assets/img/badges/240px-Boulder_Badge.png"
+                                                        title="Badge Roche - Divise par 2 le temps d'attente à la Polo-Roulette."
+                                                        style="height:15px;"></p>
+        <p>% de chances : 1% par n° gagnant</p>
+        <p *ngIf="!hasBadge(poloUser.badges, 'cascade')">N° gagnants / gains :</p>
+        <p *ngIf="hasBadge(poloUser.badges, 'cascade')">N° gagnants / gains <img src="/assets/img/badges/240px-Cascade_Badge.png"
+                                                                                 title="Badge Cascade - Multiplie par 2 les gains à la Polo-Roulette."
+                                                                                 style="height:15px;"> :</p>
+        <ul *ngIf="!hasBadge(poloUser.badges, 'cascade')">
           <li>&nbsp;&nbsp;9 : <span class="badge badge-warning">&nbsp;&nbsp;10<img src="favicon.ico" height="16" width="16"></span></li>
           <li>42 : <span class="badge badge-warning">&nbsp;&nbsp;20<img src="favicon.ico" height="16" width="16"></span></li>
           <li>66 : <span class="badge badge-warning">&nbsp;&nbsp;50<img src="favicon.ico" height="16" width="16"></span></li>
           <li>77 : <span class="badge badge-warning">100<img src="favicon.ico" height="16" width="16"></span></li>
+        </ul>
+        <ul *ngIf="hasBadge(poloUser.badges, 'cascade')">
+          <li>&nbsp;&nbsp;9 : <span class="badge badge-warning">&nbsp;&nbsp;20<img src="favicon.ico" height="16" width="16"></span></li>
+          <li>42 : <span class="badge badge-warning">&nbsp;&nbsp;40<img src="favicon.ico" height="16" width="16"></span></li>
+          <li>66 : <span class="badge badge-warning">100<img src="favicon.ico" height="16" width="16"></span></li>
+          <li>77 : <span class="badge badge-warning">200<img src="favicon.ico" height="16" width="16"></span></li>
         </ul>
       </div>
     </div>

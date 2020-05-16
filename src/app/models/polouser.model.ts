@@ -4,6 +4,7 @@ export class PoloUser {
   email: string;
   avatarUrl: string;
   polodollars: number;
+  badges: any[];
 
   constructor() {
   }

@@ -1,0 +1,111 @@
+<div class="row" xmlns:disabled="http://www.w3.org/1999/xhtml">
+
+  <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-12">
+      <br />
+      <img src="/assets/img/shopPolo.png" class="img-thumbnail centerImg">
+    </div>
+  </div>
+
+  <div *ngIf="!name || !emailVerified"
+       class="col-md-8 col-md-offset-2">
+    <div *ngIf="poloUser"
+         class="col-md-12">
+      <h2>Espace réservé</h2>
+      <img src="/assets/img/bouncer.png">
+      <p>Espace réservé aux membre ayant : </p>
+      <ul>
+        <li>vérifié leur email</li>
+        <li>renseigné un pseudo</li>
+      </ul>
+      <p>Merci de remplir ces conditions <a (click)="redirectOnWelcome()" style="cursor:pointer">à l'accueil</a>.</p>
+    </div>
+  </div>
+
+  <div *ngIf="name && emailVerified"
+       class="col-md-8 col-md-offset-2">
+    <br />
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-striped">
+          <tbody>
+          <tr style="text-align: center;">
+            <td class="align-middle">
+              <img src="/assets/img/badges/240px-Boulder_Badge.png"
+                   style="height:50px;">
+            </td>
+            <td class="align-middle text-left">
+              <b>Badge Roche</b>
+              <br />
+              Divise par 2 le temps d'attente à la Polo-Roulette.
+            </td>
+            <td class="align-middle"><span class="badge badge-warning">200<img src="favicon.ico" height="16" width="16"></span></td>
+            <td class="align-middle">
+              <form *ngIf="!hasBadge(poloUser.badges, 'roche')"
+                    (ngSubmit)="onBuyBadgeRoche()">
+                <button class="form-control btn btn-primary"
+                        style="width:105px;"
+                        [disabled]="poloUser.polodollars < 200"
+                        type="submit">Acheter <span class="glyphicon glyphicon-shopping-cart"></span></button>
+              </form>
+              <button *ngIf="hasBadge(poloUser.badges, 'roche')"
+                      style="width:105px;cursor:no-drop;"
+                      class="form-control btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+            </td>
+          </tr>
+          <tr style="text-align: center;">
+            <td class="align-middle">
+              <img src="/assets/img/badges/240px-Cascade_Badge.png"
+                   style="height:50px;">
+            </td>
+            <td class="align-middle text-left">
+              <b>Badge Cascade</b>
+              <br />
+              Multiplie par 2 les gains à la Polo-Roulette.
+            </td>
+            <td class="align-middle"><span class="badge badge-warning">500<img src="favicon.ico" height="16" width="16"></span></td>
+            <td class="align-middle">
+              <form *ngIf="!hasBadge(poloUser.badges, 'cascade')"
+                    (ngSubmit)="onBuyBadgeCascade()">
+                <button class="form-control btn btn-primary"
+                        style="width:105px;"
+                        [disabled]="poloUser.polodollars < 500"
+                        type="submit">Acheter <span class="glyphicon glyphicon-shopping-cart"></span></button>
+              </form>
+              <button *ngIf="hasBadge(poloUser.badges, 'cascade')"
+                      style="width:105px;cursor:no-drop;"
+                      class="form-control btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+            </td>
+          </tr>
+          <tr style="text-align: center;">
+            <td class="align-middle">
+              <img src="/assets/img/badges/240px-Earth_Badge.png"
+                   style="height:50px;">
+            </td>
+            <td class="align-middle text-left">
+              <b>Badge Terre</b>
+              <br />
+              Aucun effet.
+              <br />
+              <small>...à moins que...</small>
+            </td>
+            <td class="align-middle"><span class="badge badge-warning">500<img src="favicon.ico" height="16" width="16"></span></td>
+            <td class="align-middle">
+              <form *ngIf="!hasBadge(poloUser.badges, 'terre')"
+                    (ngSubmit)="onBuyBadgeTerre()">
+                <button class="form-control btn btn-primary"
+                        style="width:105px;"
+                        [disabled]="poloUser.polodollars < 500"
+                        type="submit">Acheter <span class="glyphicon glyphicon-shopping-cart"></span></button>
+              </form>
+              <button *ngIf="hasBadge(poloUser.badges, 'terre')"
+                      style="width:105px;cursor:no-drop;"
+                      class="form-control btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

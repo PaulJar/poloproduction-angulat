@@ -19,6 +19,7 @@ import { WelcomeComponent } from './auth/welcome/welcome.component';
 import { SigninforgottenComponent } from './auth/signinforgotten/signinforgotten.component';
 import { CasinoComponent } from './casino/casino.component';
 import { RankingComponent } from './ranking/ranking.component';
+import { ShopComponent } from './shop/shop.component';
 
 const appRoutes: Routes = [
   { path: 'auth/signup', component: SignupComponent },
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   { path: 'welcome', canActivate: [AuthGuardService], component: WelcomeComponent },
   { path: 'casino', canActivate: [AuthGuardService], component: CasinoComponent },
   { path: 'ranking', canActivate: [AuthGuardService], component: RankingComponent },
+  { path: 'shop', canActivate: [AuthGuardService], component: ShopComponent },
   { path: 'books', canActivate: [AuthGuardService], component: BookListComponent },
   { path: 'books/new', canActivate: [AuthGuardService], component: BookFormComponent },
   { path: 'books/view/:id', canActivate: [AuthGuardService], component: SingleBookComponent },
@@ -46,7 +48,8 @@ const appRoutes: Routes = [
     WelcomeComponent,
     SigninforgottenComponent,
     CasinoComponent,
-    RankingComponent
+    RankingComponent,
+    ShopComponent
   ],
   imports: [
       BrowserModule,

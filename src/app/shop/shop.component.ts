@@ -11,17 +11,18 @@ import DataSnapshot = firebase.database.DataSnapshot;
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'app-ranking',
-  templateUrl: './ranking.component.html',
-  styleUrls: ['./ranking.component.scss']
+  selector: 'app-shop',
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.scss']
 })
-export class RankingComponent implements OnInit, OnDestroy {
+export class ShopComponent implements OnInit, OnDestroy {
 
   isAuth: boolean;
   name: string;
   emailVerified: boolean;
 
   poloUser: PoloUser;
+  poloUserSubscription: Subscription;
 
   poloUsers: PoloUser[] = [];
   poloUsersSubscription: Subscription;
@@ -54,6 +55,13 @@ export class RankingComponent implements OnInit, OnDestroy {
       }
     );
 
+    // Create a Subscription to a Subject
+    this.poloUserSubscription = this.usersService.poloUserSubject.subscribe(
+      (poloUser: PoloUser) => {
+        this.poloUser = poloUser;
+      }
+    );
+
     // Add Subscription on Polo Users
     this.poloUsersSubscription = this.usersService.poloUsersSubject.subscribe(
       (poloUsers: PoloUser[]) => {
@@ -71,11 +79,34 @@ export class RankingComponent implements OnInit, OnDestroy {
     this.poloUsersSubscription.unsubscribe();
   }
 
-  redirectOnWelcome() {
-    this.router.navigate(['/welcome']);
+  objectKeys(obj) {
+    return Object.keys(obj);
+  }
+
+  objectValues(obj) {
+     return Object.values(obj);
   }
 
   hasBadge(obj, badgeType: string){
     return obj!=null ? obj.hasOwnProperty(badgeType) : false;
+  }
+
+  redirectOnWelcome() {
+    this.router.navigate(['/welcome']);
+  }
+
+  onBuyBadgeRoche() {
+    // add Badge on datasbase
+    this.usersService.addBadge('roche');
+  }
+
+  onBuyBadgeCascade() {
+    // add Badge on datasbase
+    this.usersService.addBadge('cascade');
+  }
+
+  onBuyBadgeTerre() {
+    // add Badge on datasbase
+    this.usersService.addBadge('terre');
   }
 }

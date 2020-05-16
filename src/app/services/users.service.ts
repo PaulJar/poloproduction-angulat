@@ -126,6 +126,16 @@ export class UsersService {
     );
   }
 
+  savePoloUser(updates) {
+    firebase.database().ref().update(updates, function(error) {
+      if (error) {
+        console.log('Erreur d\'update PoloUser ! : ' + error);
+      } else {
+        console.log('Update PoloUser OK !');
+      }
+    });
+  }
+
   addPolodollar(poloDollarToAdd: number) {
 
     var user = firebase.auth().currentUser;
@@ -138,14 +148,37 @@ export class UsersService {
     this.emitPoloUser();
   }
 
-  savePoloUser(updates) {
-    firebase.database().ref().update(updates, function(error) {
-      if (error) {
-        console.log('Erreur d\'update PoloUser ! : ' + error);
-      } else {
-        console.log('Update PoloUser OK !');
-      }
-    });
+  addBadge(badgeType: string) {
+
+    var user = firebase.auth().currentUser;
+
+    var poloDollarToRemove = 0;
+    switch(badgeType) {
+       case 'roche': {
+          poloDollarToRemove = 200;
+          break;
+       }
+       case 'cascade': {
+          poloDollarToRemove = 500;
+          break;
+       }
+       case 'terre': {
+          poloDollarToRemove = 500;
+          break;
+       }
+       default: {
+          poloDollarToRemove = 0;
+          break;
+       }
+    }
+
+    // Write the new user's data in the users list
+    var updates = {};
+    updates['/users/' + user.uid + '/polodollars'] = this.poloUser.polodollars - poloDollarToRemove;
+    updates['/users/' + user.uid + '/badges/' + badgeType] = true;
+
+    this.savePoloUser(updates);
+    this.emitPoloUser();
   }
 
 }

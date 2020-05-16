@@ -56,6 +56,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.poloUser = new PoloUser();
     firebase.auth().onAuthStateChanged(
       (user) => {
         if(user) {
@@ -103,6 +104,11 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
+
+  hasBadge(obj, badgeType: string){
+    return obj!=null ? obj.hasOwnProperty(badgeType) : false;
+  }
+
   onSubmitEmailVerification() {
     var user = firebase.auth().currentUser;
     this.isValidateMessageMailSent = true;
@@ -146,23 +152,6 @@ export class WelcomeComponent implements OnInit {
       },
       (error) => {
         this.errorMessagePseudo = error;
-      }
-    );
-  }
-
-  onSubmitPoloRoulette() {
-    let max: number = 999;
-    this.poloRouletteNumber = Math.floor(Math.random() * Math.floor(max));
-    this.isRouletteReady = false;
-
-    return new Promise(
-      (resolve, reject) => {
-        setTimeout(
-          () => {
-            this.isRouletteReady = true;
-            resolve(true);
-          }, 2000
-        );
       }
     );
   }

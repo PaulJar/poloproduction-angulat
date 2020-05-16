@@ -1,7 +1,14 @@
 <div class="row" xmlns:disabled="http://www.w3.org/1999/xhtml">
+
+  <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-12">
+      <br />
+      <img src="/assets/img/podium2.png" class="img-thumbnail centerImg">
+    </div>
+  </div>
+
   <div *ngIf="!name || !emailVerified"
        class="col-md-8 col-md-offset-2">
-
     <div *ngIf="poloUser"
          class="col-md-12">
       <h2>Espace réservé</h2>
@@ -32,12 +39,28 @@
           <tbody>
           <tr *ngFor="let poloUserToList of poloUsers; let i = index"
               style="text-align: center;">
-            <td>{{ i+1 }}</td>
-            <td><img class="img-thumbnail"
+            <td class="align-middle">{{ i+1 }}</td>
+            <td class="align-middle">
+              <img class="img-thumbnail"
                      *ngIf="poloUserToList.avatarUrl"
                      src="{{ poloUserToList.avatarUrl }}"
-                     style="height:50px;">      {{ poloUserToList.pseudo }}</td>
-            <td>{{ poloUserToList.polodollars }}</td>
+                     style="height:50px;">
+              <span *ngIf="poloUserToList.pseudo"> {{ poloUserToList.pseudo }} </span>
+              <span *ngIf="!poloUserToList.pseudo"> Mysterio {{ i+1 }}</span>
+              <img src="/assets/img/badges/240px-Boulder_Badge.png"
+                   *ngIf="hasBadge(poloUserToList.badges, 'roche')"
+                   title="Badge Roche - Divise par 2 le temps d'attente à la Polo-Roulette."
+                   style="height:15px;">
+              <img src="/assets/img/badges/240px-Cascade_Badge.png"
+                   *ngIf="hasBadge(poloUserToList.badges, 'cascade')"
+                   title="Badge Cascade - Multiplie par 2 les gains à la Polo-Roulette."
+                   style="height:15px;">
+              <img src="/assets/img/badges/240px-Earth_Badge.png"
+                   *ngIf="hasBadge(poloUserToList.badges, 'terre')"
+                   title="Badge Terre - :)"
+                   style="height:15px;">
+            </td>
+            <td class="align-middle">{{ poloUserToList.polodollars }}</td>
           </tr>
           </tbody>
         </table>

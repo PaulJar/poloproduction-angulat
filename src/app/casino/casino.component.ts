@@ -40,7 +40,7 @@ export class CasinoComponent implements OnInit, OnDestroy {
     setTimeout(
       () => {
         this.isRouletteReady = true;
-      }, 4000
+      }, 2000
     );
   }
 
@@ -80,6 +80,7 @@ export class CasinoComponent implements OnInit, OnDestroy {
       }
     );
 
+    // Add Subscription on Polo Users
     this.poloUsersSubscription = this.usersService.poloUsersSubject.subscribe(
       (poloUsers: PoloUser[]) => {
         this.poloUsers = poloUsers;
@@ -92,7 +93,12 @@ export class CasinoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    // Remove Subscription on Polo Users
     this.poloUsersSubscription.unsubscribe();
+  }
+
+  hasBadge(obj, badgeType: string){
+    return obj!=null ? obj.hasOwnProperty(badgeType) : false;
   }
 
   onSubmitPoloRoulette() {
@@ -126,18 +132,24 @@ export class CasinoComponent implements OnInit, OnDestroy {
 
     // add PoloDollar on database
     if(this.poloRoulettePPWon > 0) {
+      var hasBaggeCascade = this.hasBadge(this.poloUser.badges, 'cascade');
+      if(hasBaggeCascade) {
+        this.poloRoulettePPWon = this.poloRoulettePPWon * 2;
+      }
       this.usersService.addPolodollar(this.poloRoulettePPWon);
       this.poloRouletteMsgWon = "BRAVO ! Vous avez gagné ";
     }
 
     return new Promise(
       (resolve, reject) => {
+        var hasBaggeRoche = this.hasBadge(this.poloUser.badges, 'roche');
+        var timeout = hasBaggeRoche ? 1000 : 2000;
         setTimeout(
           () => {
             this.isRouletteReady = true;
             this.poloRouletteMsgWon = "";
             resolve(true);
-          }, 2000
+          }, timeout
         );
       }
     );

@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+.centerImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.badge-warning {
+    color: #212529;
+    background-color: #ffc107;
+}
+
+.align-middle {
+  vertical-align: middle !important;
+}

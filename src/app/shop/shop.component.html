@@ -103,6 +103,30 @@
                       class="form-control btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
             </td>
           </tr>
+          <tr style="text-align: center;">
+            <td class="align-middle">
+              <img src="/assets/img/badges/240px-Thunder_Badge.png"
+                   style="height:50px;">
+            </td>
+            <td class="align-middle text-left">
+              <b>Badge Eclair</b>
+              <br />
+              Le bouton de gain apparaît plus fréquemment à la table 'Flash'.
+            </td>
+            <td class="align-middle"><span class="badge badge-warning">1.000<img src="favicon.ico" height="16" width="16"></span></td>
+            <td class="align-middle">
+              <form *ngIf="!hasBadge(poloUser.badges, 'eclair')"
+                    (ngSubmit)="onBuyBadgeEclair()">
+                <button class="form-control btn btn-primary"
+                        style="width:105px;"
+                        [disabled]="poloUser.polodollars < 1000"
+                        type="submit">Acheter <span class="glyphicon glyphicon-shopping-cart"></span></button>
+              </form>
+              <button *ngIf="hasBadge(poloUser.badges, 'eclair')"
+                      style="width:105px;cursor:no-drop;"
+                      class="form-control btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>

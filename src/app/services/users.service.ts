@@ -86,11 +86,16 @@ export class UsersService {
   }
 
   createPoloUser(user: firebase.User) {
+    var stats: any[] = [];
+    stats['chance'] = 0;
+    stats['intelligence'] = 0;
+    stats['rapidite'] = 0;
     firebase.database().ref('users/' + user.uid).set({
       pseudo: user.displayName,
       email: user.email,
       avatarUrl: user.photoURL,
-      polodollars: 0
+      polodollars: 0,
+      stats
     }, function(error) {
       if (error) {
         console.log('Erreur de création PoloUser ! : ' + error);
@@ -136,13 +141,20 @@ export class UsersService {
     });
   }
 
-  addPolodollar(poloDollarToAdd: number) {
+  addPolodollar(poloDollarToAdd: number, tableNumber: number) {
 
     var user = firebase.auth().currentUser;
 
     // Write the new user's data in the users list
     var updates = {};
     updates['/users/' + user.uid + '/polodollars'] = this.poloUser.polodollars + poloDollarToAdd;
+    if(tableNumber==1){
+      updates['/users/' + user.uid + '/stats/chance'] = this.poloUser.stats['chance'] + 1;
+    } else if(tableNumber==2 && poloDollarToAdd>0){
+      updates['/users/' + user.uid + '/stats/intelligence'] = this.poloUser.stats['intelligence'] + 1;
+    } else if(tableNumber==3){
+      updates['/users/' + user.uid + '/stats/rapidite'] = this.poloUser.stats['rapidite'] + 1;
+    }
 
     this.savePoloUser(updates);
     this.emitPoloUser();

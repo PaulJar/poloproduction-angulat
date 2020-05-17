@@ -109,4 +109,9 @@ export class ShopComponent implements OnInit, OnDestroy {
     // add Badge on datasbase
     this.usersService.addBadge('terre');
   }
+
+  onBuyBadgeEclair() {
+    // add Badge on datasbase
+    this.usersService.addBadge('eclair');
+  }
 }

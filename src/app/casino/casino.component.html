@@ -35,7 +35,7 @@
     <!-- Polo Roulette -->
     <div class="row">
       <div class="form-group col-md-12">
-        <h3>Table n°1 - la Polo-Roulette</h3>
+        <h3>Table n°1 - la Polo-Roulette <img title="Chaque victoire augmente votre stat 'Chance' de 1" src="/assets/img/levelup.png" height="32px" width="32px"></h3>
         <p>Objectif : lancez la roulette, et tombez sur le bon numéro pour gagner des
           <span class="badge badge-warning"><img src="favicon.ico" height="16" width="16"></span> !</p>
         <p *ngIf="!hasBadge(poloUser.badges, 'roche')">Temps de recharge : 2 sec.</p>
@@ -94,7 +94,7 @@
     <!-- Parie pas ! -->
     <div class="row">
       <div class="form-group col-md-12">
-        <h3>Table n°2 - Parie pas !</h3>
+        <h3>Table n°2 - Parie pas ! <img title="Chaque victoire augmente votre stat 'Intelligence' de 1" src="/assets/img/levelup.png" height="32px" width="32px"></h3>
         <p>Objectif : 1 chance / 4 de tripler votre mise !</p>
         <p>Mise max : <span class="badge badge-warning">10<img src="favicon.ico" height="16" width="16"></span></p>
       </div>
@@ -132,8 +132,12 @@
     <!-- Flash -->
     <div class="row">
       <div class="form-group col-md-12">
-        <h3>Table n°3 - Flash</h3>
-        <p>Objectif : Un bouton de gain apparaît aléatoirement.</p>
+        <h3>Table n°3 - Flash <img title="Chaque victoire augmente votre stat 'Rapidité' de 1" src="/assets/img/levelup.png" height="32px" width="32px"></h3>
+        <p>Objectif : Un bouton de gain apparaît aléatoirement.
+          <img *ngIf="hasBadge(poloUser.badges, 'eclair')"
+            src="/assets/img/badges/240px-Thunder_Badge.png"
+            title="Badge Eclair - Le bouton de gain apparaît plus fréquemment à la table 'Flash'."
+            style="height:15px;">
         <p>Clique dessus pour gagner le gain, avant que le bouton ne disparaisse !</p>
       </div>
     </div>

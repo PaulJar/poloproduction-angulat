@@ -55,6 +55,12 @@ export class WelcomeComponent implements OnInit {
     );
   }
 
+  public radarChartLabels = ['Chance', 'Intelligence', 'Rapidité'];
+  public radarChartData = [
+    {data: [0, 0, 0], label: 'Stats'}
+  ];
+  public radarChartType = 'radar';
+
   ngOnInit() {
     this.poloUser = new PoloUser();
     firebase.auth().onAuthStateChanged(
@@ -73,6 +79,9 @@ export class WelcomeComponent implements OnInit {
           this.usersService.getCurrentPoloUser().then(
             (poloUser: PoloUser) => {
               this.poloUser = poloUser;
+              this.radarChartData = [
+                  {data: [this.poloUser.stats['chance'], this.poloUser.stats['intelligence'], this.poloUser.stats['rapidite']], label: 'Stats'}
+                ]
             }
           );
         } else {

@@ -38,6 +38,7 @@
             </div>
           </div>
         </form>
+
       </div>
 
   <!--
@@ -176,7 +177,12 @@
               </td>
               <td>
                 <img src="/assets/img/badges/240px-No_Badge.png"
+                     *ngIf="!hasBadge(poloUser.badges, 'eclair')"
                      title="Tu n'as pas encore ce badge !"
+                     style="height:50px;">
+                <img src="/assets/img/badges/240px-Thunder_Badge.png"
+                     *ngIf="hasBadge(poloUser.badges, 'eclair')"
+                     title="Badge Eclair - Le bouton de gain apparaît plus fréquemment à la table 'Flash'."
                      style="height:50px;">
               </td>
             </tr>
@@ -212,6 +218,20 @@
         </div>
         </form>-->
 
+        <!-- Stats -->
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="email">Statistiques</label>
+          </div>
+        </div>
+        <div class="row">
+          <div style="display: block">
+            <canvas baseChart
+                    [datasets]="radarChartData"
+                    [labels]="radarChartLabels"
+                    [chartType]="radarChartType"></canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>

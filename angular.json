@@ -54,7 +54,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/js/particules.js"
+              "src/assets/js/particules.js",
+              "node_modules/chart.js/dist/Chart.js"
             ]
           },
           "configurations": {

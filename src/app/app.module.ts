@@ -20,6 +20,7 @@ import { SigninforgottenComponent } from './auth/signinforgotten/signinforgotten
 import { CasinoComponent } from './casino/casino.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { ShopComponent } from './shop/shop.component';
+import { ChartsModule } from 'ng2-charts';
 
 const appRoutes: Routes = [
   { path: 'auth/signup', component: SignupComponent },
@@ -56,7 +57,8 @@ const appRoutes: Routes = [
       FormsModule,
       ReactiveFormsModule,
       HttpClientModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      ChartsModule
     ],
   providers: [AuthService, BooksService, AuthGuardService],
   bootstrap: [AppComponent]

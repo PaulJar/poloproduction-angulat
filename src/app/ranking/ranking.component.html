@@ -31,9 +31,10 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th scope="col" style="text-align: center;">#</th>
-            <th scope="col" style="text-align: center;">Joueur</th>
-            <th scope="col" style="text-align: center;"><span class="badge badge-warning"><img src="favicon.ico" height="16" width="16"></span></th>
+            <th scope="col" style="text-align: center;width: 15%;">#</th>
+            <th scope="col" style="text-align: center;width: 40%;">Joueur</th>
+            <th scope="col" style="text-align: center;width: 25%;">Stats</th>
+            <th scope="col" style="text-align: center;width: 20%;"><span class="badge badge-warning"><img src="favicon.ico" height="16" width="16"></span></th>
           </tr>
           </thead>
           <tbody>
@@ -59,6 +60,17 @@
                    *ngIf="hasBadge(poloUserToList.badges, 'terre')"
                    title="Badge Terre - :)"
                    style="height:15px;">
+              <img src="/assets/img/badges/240px-Thunder_Badge.png"
+                   *ngIf="hasBadge(poloUserToList.badges, 'eclair')"
+                   title="Badge Eclair - Le bouton de gain apparaît plus fréquemment à la table 'Flash'."
+                   style="height:15px;">
+            </td>
+            <td class="text-right">
+              Chance <span class="badge badge-primary text-left">{{ poloUserToList.stats['chance'] }}</span>
+              <br />
+              Intelligence <span class="badge badge-primary badge-pill">{{ poloUserToList.stats['intelligence'] }}</span>
+              <br />
+              Rapidité <span class="badge badge-primary">{{ poloUserToList.stats['rapidite'] }}</span>
             </td>
             <td class="align-middle">{{ poloUserToList.polodollars }}</td>
           </tr>

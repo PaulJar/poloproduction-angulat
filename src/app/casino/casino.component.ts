@@ -154,7 +154,7 @@ export class CasinoComponent implements OnInit, OnDestroy {
       if(hasBaggeCascade) {
         this.poloRoulettePPWon = this.poloRoulettePPWon * 2;
       }
-      this.usersService.addPolodollar(this.poloRoulettePPWon);
+      this.usersService.addPolodollar(this.poloRoulettePPWon, 1);
       this.poloRouletteMsgWon = "BRAVO ! Vous avez gagné ";
     }
 
@@ -218,7 +218,7 @@ export class CasinoComponent implements OnInit, OnDestroy {
       }
 
       // add/remove PoloDollar on database
-      this.usersService.addPolodollar(this.pariePasPPWon);
+      this.usersService.addPolodollar(this.pariePasPPWon, 2);
 
       if(this.pariePasPPWon > 0) {
         this.pariePasMsgWon = "BRAVO ! Vous avez gagné ";
@@ -236,6 +236,12 @@ export class CasinoComponent implements OnInit, OnDestroy {
     this.leftRandom = Math.floor(Math.random() * Math.floor(maxLeft)) + 1;
 
     let maxDisplay: number = 7; // between 1 and 7
+    if(this.poloUser!=null) {
+      var hasBaggeEclair = this.hasBadge(this.poloUser.badges, 'eclair');
+      if(hasBaggeEclair){
+        maxDisplay = 5; // between 1 and 5
+      }
+    }
     this.displayRandom = Math.floor(Math.random() * Math.floor(maxDisplay)) + 1 == 1 ? true : false;
   }
 
@@ -244,7 +250,7 @@ export class CasinoComponent implements OnInit, OnDestroy {
     this.flashPPWon = Math.floor(Math.random() * Math.floor(maxPPWin)) + 1;
 
     // add/remove PoloDollar on database
-    this.usersService.addPolodollar(this.flashPPWon);
+    this.usersService.addPolodollar(this.flashPPWon, 3);
 
     this.flashMsgWon = "BRAVO ! Vous avez gagné ";
   }

@@ -66,16 +66,17 @@
       <div class="row">
         <div class="form-group col-md-6">
           <div class="container">
-            <img src="https://pngimage.net/wp-content/uploads/2018/06/poker-table-png-1.png" alt="Polo Roulette" style="width:100%;max-height:130px;">
+            <img src="/assets/img/casino/roulette.png" alt="Polo Roulette" style="width:100%;max-height:130px;">
             <button *ngIf="isRouletteReady"
                     type="submit"
+                    style="font-size:14px;"
                     class="btn btn-primary">Lancer la Polo-Roulette ! <span class="glyphicon glyphicon-play-circle" style="color:lightgreen"></span></button>
           </div>
         </div>
         <div *ngIf="poloRouletteNumber"
              class="form-group col-md-6">
           <div class="container">
-            <img src="http://clipart-library.com/images/BTgKzAGec.png" alt="Polo Roulette" style="width:100%;max-height:130px;">
+            <img src="/assets/img/casino/ticket.png" alt="Polo Roulette" style="width:100%;max-height:130px;">
             <button class="btn btn-primary"
                     disabled
                     style="background-color: #E6C95C;font-size: 32px;">{{ poloRouletteNumber }}</button>

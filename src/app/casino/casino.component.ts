@@ -239,7 +239,7 @@ export class CasinoComponent implements OnInit, OnDestroy {
     if(this.poloUser!=null) {
       var hasBaggeEclair = this.hasBadge(this.poloUser.badges, 'eclair');
       if(hasBaggeEclair){
-        maxDisplay = 5; // between 1 and 5
+        maxDisplay = 6; // between 1 and 6
       }
     }
     this.displayRandom = Math.floor(Math.random() * Math.floor(maxDisplay)) + 1 == 1 ? true : false;

@@ -18,6 +18,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   poloUserSubscription: Subscription;
 
+  navbarOpen = false;
+
   constructor(private authService: AuthService,
               private usersService: UsersService) { }
 
@@ -55,4 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.signOutUser();
   }
 
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
 }

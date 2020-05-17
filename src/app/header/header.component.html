@@ -1,34 +1,44 @@
-<nav class="navbar-inverse navbar-default">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <ul class="nav navbar-nav" *ngIf="isAuth">
-      <li routerLinkActive="active">
-        <a routerLink="welcome">Accueil</a>
-      </li>
-      <li routerLinkActive="active">
-        <a routerLink="casino">Casino</a>
-      </li>
-      <li routerLinkActive="active">
-        <a routerLink="ranking">Classement</a>
-      </li>
-      <li routerLinkActive="active">
-        <a routerLink="shop">La Boutique de Polo</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li routerLinkActive="active" *ngIf="!isAuth">
-        <a routerLink="auth/signup">Créer un compte</a>
-      </li>
-      <li routerLinkActive="active" *ngIf="!isAuth">
-        <a routerLink="auth/signin">Connexion</a>
-      </li>
-      <li routerLinkActive="active" *ngIf="isAuth && poloUser">
-        <a routerLink="shop"><span class="badge badge-warning">{{ poloUser.polodollars }}<img src="favicon.ico" height="16" width="16"></span></a>
-      </li>
-      <li>
-        <a (click)="onSignOut()"
-           style="cursor:pointer"
-           *ngIf="isAuth">Déconnexion</a>
-      </li>
-    </ul>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" (click)="toggleNavbar()">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Polo Production</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar" [ngClass]="{ 'show': navbarOpen }">
+      <ul class="nav navbar-nav" *ngIf="isAuth">
+        <li routerLinkActive="active">
+          <a routerLink="welcome">Accueil</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="casino">Casino</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="ranking">Classement</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="shop">La Boutique de Polo</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li routerLinkActive="active" *ngIf="!isAuth">
+          <a routerLink="auth/signup"><span class="glyphicon glyphicon-user"></span> Créer un compte</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="!isAuth">
+          <a routerLink="auth/signin"><span class="glyphicon glyphicon-log-in"></span> Connexion</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="isAuth && poloUser">
+          <a routerLink="shop"><span class="badge badge-warning">{{ poloUser.polodollars }}<img src="favicon.ico" height="16" width="16"></span></a>
+        </li>
+        <li>
+          <a (click)="onSignOut()"
+             style="cursor:pointer"
+             *ngIf="isAuth"><span class="glyphicon glyphicon-log-out"></span> Déconnexion</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>

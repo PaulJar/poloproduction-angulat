@@ -183,6 +183,8 @@ export class CasinoComponent implements OnInit, OnDestroy {
     let pariePasMise = this.pariePasForm.get('pariePasMise').value;
     if(pariePasMise > 10) {
       pariePasMise = 10;
+    } else if (pariePasMise < 0) {
+      pariePasMise = 0;
     }
 
     if(pariePasMise>this.poloUser.polodollars) {

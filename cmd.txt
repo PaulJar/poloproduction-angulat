@@ -33,6 +33,7 @@ firebase deploy -m "Add casino and ranking"
 firebase deploy -m "Add Boutique"
 firebase deploy -m "Add 2 tables on casino"
 firebase deploy -m "Add stats - Add 1 badge"
+firebase deploy -m "Add responsive menu"
 
 npm install firebase --save
 

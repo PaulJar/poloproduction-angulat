@@ -34,6 +34,7 @@ firebase deploy -m "Add Boutique"
 firebase deploy -m "Add 2 tables on casino"
 firebase deploy -m "Add stats - Add 1 badge"
 firebase deploy -m "Add responsive menu"
+firebase deploy -m "Remove avatar upload for smal devices"
 
 npm install firebase --save
 

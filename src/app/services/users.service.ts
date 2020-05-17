@@ -178,6 +178,10 @@ export class UsersService {
           poloDollarToRemove = 500;
           break;
        }
+       case 'eclair': {
+          poloDollarToRemove = 1000;
+          break;
+       }
        default: {
           poloDollarToRemove = 0;
           break;
